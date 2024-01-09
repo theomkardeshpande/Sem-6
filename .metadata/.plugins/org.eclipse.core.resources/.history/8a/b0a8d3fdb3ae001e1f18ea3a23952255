@@ -1,0 +1,52 @@
+package labbook;
+
+import java.awt.FlowLayout;
+
+import javax.management.loading.PrivateClassLoader;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.mysql.cj.protocol.a.result.ResultsetRowsStatic;
+
+//Write a java program to accept the details of Hospital (HId, HName, Address, PH_No)
+//and store it into the database. (Use Swing).
+public class Assignment1_B1 {
+
+	public static void main(String[] args) {
+		String urlString="jdbc:mysql://localhost;3306/ty";
+		String nameString="root";
+		String passString="root";		
+	}
+	private static void	GUI()
+	{
+		JFrame hospitalFrame=new JFrame();
+		JPanel hosPanel=new JPanel(new FlowLayout());
+		
+		JLabel hidJLabel=new JLabel("Enter Hid:");
+		JTextField hidField=new JTextField(15);
+		
+		JLabel hnameLabel=new JLabel("Enter Hname:");
+		JTextField hnameField=new JTextField(15);
+		
+		JLabel hadddressLabel=new JLabel("Enter Haddress:");
+		JTextField haddressField=new JTextField(15);
+		
+		JLabel hphoneLabel=new JLabel("Enter Hphone:");
+		JTextField hphoneField=new JTextField(15);
+		hosPanel.add(hidJLabel);
+		hosPanel.add(hidField);
+		
+		hosPanel.add(hnameLabel);
+		hosPanel.add(hnameField);
+		
+		hosPanel.add(hadddressLabel);
+		hosPanel.add(haddressField);
+		
+		hosPanel.add(hphoneLabel);
+		hosPanel.add(hphoneField);
+		
+	}
+
+}

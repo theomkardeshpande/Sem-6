@@ -1,0 +1,5 @@
+INDEX VERSION 1.132+C:\Users\Admin\Desktop\Omkar Deshpande\.metadata\.plugins\org.eclipse.jdt.core
+3413725848.index
+788242962.index
+2081575579.index
+1865797976.index
