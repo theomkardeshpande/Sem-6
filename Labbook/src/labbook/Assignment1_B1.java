@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JButton;
@@ -17,27 +19,18 @@ import javax.swing.JTextField;
 //Write a java program to accept the details of Hospital (HId, HName, Address, PH_No)
 //and store it into the database. (Use Swing).
 public class Assignment1_B1 {
-	public static String QUERY_STRING;
+	
 	public static void main(String[] args) {
-		String urlString="jdbc:mysql://localhost;3306/ty";
-		String nameString="root";
-		String passString="root";
 		GUI();
-		
-//		try {
-//			Connection connection=DriverManager.getConnection(urlString,nameString,passString);
-//			Statement stmtStatement=connection.createStatement();
-//			stmtStatement.executeQuery(QUERY_STRING);
-//			System.out.println("Values Inserted..!");
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	public static void GUI()
 	{
-		JFrame hospitalFrame=new JFrame();
+		JFrame hospitalFrame=new JFrame("Hospital Frame");
+		hospitalFrame.setDefaultCloseOperation(3);
+		hospitalFrame.setVisible(true);
+		hospitalFrame.setSize(400,400);
+		
 		JPanel hosPanel=new JPanel(new FlowLayout());
 		
 		JLabel hidJLabel=new JLabel("Enter Hid:");
@@ -79,10 +72,29 @@ public class Assignment1_B1 {
 				String haddress=haddressField.getText();
 				String hphone=hphoneField.getText();
 				
-				QUERY_STRING="insert into Hospital values("+hid+","+hname+","+haddress+","+hphone+")";
+				String urlString="jdbc:mysql://localhost:3306/ty";
+				String nameString="root";
+				String passString="root";
+				String queryString="INSERT INTO Hospital(Hid,Hname,Haddress,Hphone) VALUES(?,?,?,?)";
 				
-				statusLabel.setText("Values is Inserted..!");
+				try {
+					Connection connection=DriverManager.getConnection(urlString,nameString,passString);
+					PreparedStatement prpStatement=connection.prepareStatement(queryString);
+					prpStatement.setInt(1, hid);
+					prpStatement.setString(2, hname);
+					prpStatement.setString(3, haddress);
+					prpStatement.setString(4, hphone);
+					
+					int rowaffected=prpStatement.executeUpdate();
+					System.out.println("Rows Affected:"+rowaffected);
+					prpStatement.close();
+					connection.close();
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				
+
 			}
 		});
 		
